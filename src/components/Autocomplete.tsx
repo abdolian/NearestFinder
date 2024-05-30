@@ -8,6 +8,7 @@ import { useDebounce } from 'use-debounce';
 export type AutocompleteProps<T> = {
   debounced?: number;
   items: T[];
+  loading?: boolean;
   keyProperty: string;
   valueProperty: string;
   onInput?: (query: string) => void;
@@ -18,6 +19,7 @@ export const Autocomplete = <T,>(props: AutocompleteProps<T>) => {
   const {
     debounced,
     items,
+    loading,
     keyProperty,
     valueProperty,
     onInput,
@@ -61,6 +63,14 @@ export const Autocomplete = <T,>(props: AutocompleteProps<T>) => {
             placeholder="Type here"
             {...combobox.getInputProps()}
           />
+          {loading && (
+            <div
+              aria-label="loading"
+              className="w-6 h-6 animate-spin inline-block border-[3px] border-current border-t-transparent text-blue-600 rounded-full"
+              role="status"
+            />
+          )}
+
           {combobox.selectedItem && (
             <button
               aria-label="clear selection"
