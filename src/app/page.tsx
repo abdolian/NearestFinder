@@ -53,11 +53,38 @@ export default function Home() {
       <p>© 2024 Nearest Finder. All Rights Reserved.</p>
       <p>Nearest Finder</p>
       {country && (
-        <Map latitude={country.latlng[0]} longitude={country.latlng[1]} />
+        <div>
+          <span>name</span>
+          <span>{country.name}</span>
+
+          <span>capital</span>
+          <span>{country.capital}</span>
+
+          <span>region</span>
+          <span>{country.region}</span>
+
+          <span>population</span>
+          <span>{country.population}</span>
+
+          <span>flag</span>
+          <span>      <Image
+            src={country.flag}
+            alt={country.name}
+            width={100}
+            height={100}
+          /> </span>
+
+
+
+
+        </div>
       )}
+      {/* {country && (
+        <Map latitude={country.latlng[0]} longitude={country.latlng[1]} />
+      )} */}
       <Image
         src="/logo.png"
-        alt="Vercel Nearest Finder"
+        alt="Nearest Finder Logo"
         width={100}
         height={100}
       />
