@@ -62,20 +62,21 @@ export default function Home() {
             Find out which country is closest to you and explore its data
           </p>
         </div>
-        <div className="w-full xl:w-3/5 py-6 overflow-y-hidden">
-          {/* <img className="w-5/6 mx-auto lg:mr-0 slide-in-bottom" src="devices.svg" /> */}
+        <div className="w-full xl:w-3/5 py-6">
+          {country?.name}
           <Autocomplete
             debounced={250}
             items={countries}
             loading={loading}
             keyProperty="name"
             valueProperty="name"
-            onInput={setQuery}
+            onInput={(query) => {
+              setQuery(country?.name == query ? '' : query);
+            }}
             onSelect={setCountry}
           />
           {error && <p>{error}</p>}
           {/* 
-          
           {country && (
             <div>
               <span>name</span>
