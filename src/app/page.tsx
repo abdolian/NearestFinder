@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 
 import { search } from "@/actions";
 import { Autocomplete } from "@/components";
@@ -38,7 +39,16 @@ export default function Home() {
         onSelect={setCountry}
       />
       {error && <p>{error}</p>}
+      <p>Curious about which country is closest to where you are right now? Find out!</p>
       {query} - {country?.name}
+      <p>© 2024 Nearest Finder. All Rights Reserved.</p>
+      <p>Nearest Finder</p>
+      <Image
+        src="/logo.png"
+        alt="Vercel Nearest Finder"
+        width={100}
+        height={100}
+      />
     </main>
   );
 }
