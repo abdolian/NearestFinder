@@ -18,7 +18,7 @@ export default function Home() {
   useEffect(() => {
     setError('');
 
-    if (!query.trim()) return;
+    if (!query.trim()) return setCountries([]);
 
     search(query)
       .then(setCountries)
