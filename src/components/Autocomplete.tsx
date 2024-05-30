@@ -58,7 +58,7 @@ export const Autocomplete = <T,>(props: AutocompleteProps<T>) => {
         <div className="flex shadow-sm bg-white gap-0.5">
           <input
             className="w-full p-1.5"
-            placeholder="Best book ever"
+            placeholder="Type here"
             {...combobox.getInputProps()}
           />
           {combobox.selectedItem && (

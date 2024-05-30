@@ -40,7 +40,7 @@ export default function Home() {
       />
       {error && <p>{error}</p>}
       <p>Curious about which country is closest to where you are right now? Find out!</p>
-      {query} - {country?.name}
+      {country?.name}
       <p>© 2024 Nearest Finder. All Rights Reserved.</p>
       <p>Nearest Finder</p>
       <Image
