@@ -8,6 +8,10 @@ const COUNTRIES_SOURCE_FILE = process.cwd() + '/src/data/countries.json';
 
 let cache: Country[] = [];
 
+/**
+ * Loads the list of countries from the source file.
+ * @returns A Promise that resolves to an array of country objects.
+ */
 export async function loadCountries(): Promise<Country[]> {
   if (cache.length) return cache;
 
