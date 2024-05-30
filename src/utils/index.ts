@@ -1,2 +1,2 @@
-export * from './calculateDistance';
-export * from './degreeToRadian';
+export * from "./calculateDistance";
+export * from "./degreeToRadian";

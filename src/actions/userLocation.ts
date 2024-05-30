@@ -1,4 +1,4 @@
-'use server'
+"use server"
 
 /**
  * The structure of a user's location data.
@@ -25,7 +25,7 @@ export interface UserLocation {
  * @returns A Promise that resolves to a location object.
  */
 export async function userLocation(): Promise<UserLocation> {
-  const response = await fetch('http://ip-api.com/json');
+  const response = await fetch("http://ip-api.com/json");
 
   const location = await response.json() as UserLocation;
 

@@ -1,8 +1,8 @@
-'use server'
+"use server"
 
-import { loadCountries, userLocation } from '@/actions';
+import { loadCountries, userLocation } from "@/actions";
 import { Country } from "@/types";
-import { calculateDistance } from '@/utils';
+import { calculateDistance } from "@/utils";
 
 /**
  * Searches for countries based on a query and sorts them by distance from the user's location.
