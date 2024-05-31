@@ -9,8 +9,10 @@ const config: Config = {
   theme: {
     extend: {
       animation: {
-        'fade-in': 'fade-in 0.25s ease-out',
+        'fade-in': 'fade-in 0.25s forwards ease-out',
+        'slide-down': 'slide-down 0.25s forwards ease-out',
         'slide-up': 'slide-up 0.25s forwards ease-out',
+        'spin': 'spin 1s linear infinite'
       },
       backgroundImage: {
         'hero-pattern': "url('/background.svg')"
@@ -18,13 +20,21 @@ const config: Config = {
     },
     keyframes: {
       'fade-in': {
-        '0%': { opacity: '0' },
-        '100%': { opacity: '1' },
+        'from': { opacity: '0' },
+        'to': { opacity: '1' },
+      },
+      'slide-down': {
+        'from': { transform: 'translateY(-7rem)' },
+        'to': { transform: 'translateY(0%)' },
       },
       'slide-up': {
-        '0%': { transform: 'translateY(0%)' },
-        '100%': { transform: 'translateY(-7rem)' },
-      }
+        'from': { transform: 'translateY(0%)' },
+        'to': { transform: 'translateY(-7rem)' },
+      },
+      'spin': {
+        'from': { transform: 'rotate(0deg)' },
+        'to': { transform: 'rotate(360deg)' },
+      },
     }
   },
   plugins: [],
