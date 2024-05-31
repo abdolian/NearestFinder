@@ -1,6 +1,6 @@
 "use server"
 
-import { loadCountries, userLocation } from "@/actions";
+import { UserLocation, loadCountries, userLocation } from "@/actions";
 import { Country } from "@/types";
 import { calculateDistance } from "@/utils";
 
@@ -9,12 +9,19 @@ import { calculateDistance } from "@/utils";
  * @param query The search query to filter countries by their names.
  * @returns An array of countries that match the query and are sorted by distance from the user's location.
  */
-export async function search(query: string): Promise<Country[]> {
+export async function search(query: string, options?: { latitude: number; longitude: number; }): Promise<Country[]> {
   // Loads countries
   const countries = await loadCountries();
 
+  let location: UserLocation = {} as any;
+
   // Fetches the current user's location
-  const location = await userLocation();
+  if (options) {
+    location.lat = options.latitude;
+    location.lon = options.longitude;
+  } else {
+    location = await userLocation();
+  }
 
   // Filters countries based on the query
   const filtered = countries.filter((country) => {

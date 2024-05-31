@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import { useSearchParams } from "next/navigation";
 import classnames from "classnames";
 
 import { search } from "@/actions";
@@ -9,6 +10,8 @@ import { Autocomplete, KeyValue, Map } from "@/components";
 import { Country } from "@/types";
 
 export default function Home() {
+  const searchParams = useSearchParams()
+
   const [country, setCountry] = useState<Country>();
 
   const [countries, setCountries] = useState<Country[]>([]);
@@ -21,6 +24,16 @@ export default function Home() {
 
   const [ready, setReady] = useState<boolean>(false);
 
+  function extractLatitudeLongitude() {
+    const latitude = parseFloat(searchParams.get('lat')!);
+
+    const longitude = parseFloat(searchParams.get('lng')!);
+
+    if (isNaN(latitude) || isNaN(longitude)) return;
+
+    return { latitude, longitude }
+  }
+
   useEffect(() => {
     setError("");
 
@@ -28,7 +41,7 @@ export default function Home() {
 
     setLoading(true);
 
-    search(query)
+    search(query, extractLatitudeLongitude())
       .then(setCountries)
       .catch(() => {
         setError("Something went wrong. try again in a few seconds");

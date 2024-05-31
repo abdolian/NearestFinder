@@ -10,7 +10,11 @@ First, run the development server:
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result. You should see a page like:
+
+![](Screenshot.png)
+
+> Also you can pass lat/lng as query string like http://localhost:3000?lat=12&lng=34
 
 ## Author
 
