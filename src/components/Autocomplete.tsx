@@ -51,7 +51,10 @@ export const Autocomplete = <T,>(props: AutocompleteProps<T>) => {
     return (item as any)?.[valueProperty] ?? "";
   }
 
-  useEffect(() => onInput?.(queryDebounced), [queryDebounced, onInput]);
+  useEffect(() => {
+    if (query != queryDebounced) return;
+    onInput?.(query);
+  }, [query, queryDebounced, onInput]);
 
   return (
     <div className="relative">

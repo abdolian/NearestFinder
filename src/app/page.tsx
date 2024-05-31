@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 import classnames from "classnames";
@@ -24,22 +24,22 @@ export default function Home() {
 
   const [ready, setReady] = useState<boolean>(false);
 
+  const options = useMemo(() => {
+    const latitude = parseFloat(searchParams.get('lat')!);
+
+    const longitude = parseFloat(searchParams.get('lng')!);
+
+    if (isNaN(latitude) || isNaN(longitude)) return;
+
+    return { latitude, longitude }
+  }, [searchParams])
+
   useEffect(() => {
     setError("");
 
     if (!query.trim()) return setCountries([]);
 
     setLoading(true);
-
-    const options = (() => {
-      const latitude = parseFloat(searchParams.get('lat')!);
-
-      const longitude = parseFloat(searchParams.get('lng')!);
-
-      if (isNaN(latitude) || isNaN(longitude)) return;
-
-      return { latitude, longitude }
-    })();
 
     search(query, options)
       .then(setCountries)
@@ -49,7 +49,7 @@ export default function Home() {
       .finally(() => {
         setLoading(false);
       });
-  }, [query, searchParams])
+  }, [query, options])
 
   return (
     <div className="min-h-screen">
