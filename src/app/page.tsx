@@ -24,16 +24,6 @@ export default function Home() {
 
   const [ready, setReady] = useState<boolean>(false);
 
-  function extractLatitudeLongitude() {
-    const latitude = parseFloat(searchParams.get('lat')!);
-
-    const longitude = parseFloat(searchParams.get('lng')!);
-
-    if (isNaN(latitude) || isNaN(longitude)) return;
-
-    return { latitude, longitude }
-  }
-
   useEffect(() => {
     setError("");
 
@@ -41,7 +31,17 @@ export default function Home() {
 
     setLoading(true);
 
-    search(query, extractLatitudeLongitude())
+    const options = (() => {
+      const latitude = parseFloat(searchParams.get('lat')!);
+
+      const longitude = parseFloat(searchParams.get('lng')!);
+
+      if (isNaN(latitude) || isNaN(longitude)) return;
+
+      return { latitude, longitude }
+    })();
+
+    search(query, options)
       .then(setCountries)
       .catch(() => {
         setError("Something went wrong. try again in a few seconds");
@@ -49,7 +49,7 @@ export default function Home() {
       .finally(() => {
         setLoading(false);
       });
-  }, [query])
+  }, [query, searchParams])
 
   return (
     <div className="min-h-screen">
@@ -113,7 +113,7 @@ export default function Home() {
                   ["Capital", country.capital],
                   ["Region", country.region],
                   ["Population", country.population],
-                  ["Flag", <Image src={country.flag} alt={country.name} width={48} height={32} />],
+                  ["Flag", <Image key={country.name} src={country.flag} alt={country.name} width={48} height={32} />],
                 ]}
               />
             )}
