@@ -9,7 +9,7 @@ export function Map({ latitude, longitude }: MapProps) {
     className="border-none rounded-lg"
     title="Monochrome"
     width="100%"
-    height="400px"
+    height="280px"
     src={source}
   />
 }
