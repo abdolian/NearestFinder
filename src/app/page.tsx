@@ -54,53 +54,56 @@ export default function Home() {
           </div>
         </a>
       </div>
-      <div className={classnames({ "animate-slide-up": !!country, "animate-slide-down": ready && !country })}>
-        <div className="container pt-36 px-6 mx-auto flex flex-wrap flex-col items-center">
-          <h1 className="my-4 text-3xl md:text-5xl text-rose-500 font-bold leading-tight text-center ">
-            Discover Your Nearest Country
-          </h1>
-          <p className="leading-normal text-base md:text-2xl text-center slide-in-bottom-subtitle">
-            Find out which country is closest to you and explore its data
-          </p>
-          <div className="w-4/5 md:w-[28rem] lg:w-[30rem] xl:w-[32rem] py-16">
-            <Autocomplete
-              debounced={250}
-              items={countries}
-              loading={loading}
-              keyProperty="name"
-              valueProperty="name"
-              onInput={(query) => {
-                setQuery(country?.name == query ? "" : query);
-              }}
-              onSelect={(country) => {
-                setCountry(country);
-                setReady(true);
-              }}
-            />
-            {error && <small className="text-red-500">{error}</small>}
+      <div className={classnames({
+        "container pt-36 px-6 mx-auto flex flex-wrap flex-col items-center": true,
+        "animate-slide-up": !!country,
+        "animate-slide-down": ready && !country
+      })}>
+        <h1 className="my-4 text-3xl md:text-5xl text-rose-500 font-bold leading-tight text-center ">
+          Discover Your Nearest Country
+        </h1>
+        <p className="leading-normal text-base md:text-2xl text-center slide-in-bottom-subtitle">
+          Find out which country is closest to you and explore its data
+        </p>
+        <div className="w-4/5 md:w-[28rem] lg:w-[30rem] xl:w-[32rem] py-16">
+          <Autocomplete
+            debounced={250}
+            items={countries}
+            loading={loading}
+            keyProperty="name"
+            valueProperty="name"
+            onInput={(query) => {
+              setQuery(country?.name == query ? "" : query);
+            }}
+            onSelect={(country) => {
+              setCountry(country);
+              setReady(true);
+            }}
+          />
+          {error && <small className="text-red-500">{error}</small>}
+        </div>
+        <div className={classnames({
+          "flex flex-col items-center gap-4 w-full lg:flex-row xl:w-8/12": true,
+          "animate-fade-in": !!country
+        })} >
+          <div className="w-full lg:w-1/2 shadow-xl">
+            {country && (
+              <Map latitude={country.latlng[0]} longitude={country.latlng[1]} />
+            )}
           </div>
-          <div className={classnames({ "w-full": true, "animate-fade-in": !!country })} >
-            <div className="flex flex-col items-center gap-4 w-full lg:flex-row xl:w-8/12" >
-              <div className="w-full lg:w-1/2 shadow-xl">
-                {country && (
-                  <Map latitude={country.latlng[0]} longitude={country.latlng[1]} />
-                )}
-              </div>
-              <div className="w-full lg:w-1/2 shadow-xl">
-                {country && (
-                  <KeyValue
-                    title="Details"
-                    items={[
-                      ["Name", country.name],
-                      ["Capital", country.capital],
-                      ["Region", country.region],
-                      ["Population", country.population],
-                      ["Flag", <Image src={country.flag} alt={country.name} width={48} height={32} />],
-                    ]}
-                  />
-                )}
-              </div>
-            </div>
+          <div className="w-full lg:w-1/2 shadow-xl">
+            {country && (
+              <KeyValue
+                title="Details"
+                items={[
+                  ["Name", country.name],
+                  ["Capital", country.capital],
+                  ["Region", country.region],
+                  ["Population", country.population],
+                  ["Flag", <Image src={country.flag} alt={country.name} width={48} height={32} />],
+                ]}
+              />
+            )}
           </div>
         </div>
       </div>
